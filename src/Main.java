@@ -1,54 +1,59 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
-        // 输入
         Scanner scan = new Scanner(System.in);
-        while (scan.hasNext()){
+        while (scan.hasNext()) {
             int n = scan.nextInt();
-            char[] arr = new char[n];
+            String[] arr = new String[n];
 
             for (int i = 0; i < n; i++) {
-                arr[i] = scan.next().charAt(0);
+                arr[i] = scan.next();
             }
 
-            int h = 0;
-
-            ArrayList<Character> list = new ArrayList<>();
-            helper(arr, 0,1, h,list);
+            createTree(arr);
         }
-
-        scan.close();
     }
 
-    private static void helper(char[] arr, int i, int h, int maxH,ArrayList<Character> list) {
-        char[] tmp = new char[arr.length + 2];
+    public static class TreeNode {
 
-        int flag = 0;
-        System.out.println(arr[i]);
-//        if (h < maxH && arr[i] == '#'){
-////            flag = 1;
-////            list.add('#');
-////            list.add('#');
-////            for (int j = i + 2; j < tmp.length; j++) {
-////                tmp[j] = arr[j - 2];
-////            }
-//        }
-            list.add(arr[i]);
-//        if (flag == 1){
-//            if (tmp[i]!='#' && i*2 + 2 <= tmp.length){
-//                helper(tmp, i * 2 + 1, h+1, maxH, list);
-//                helper(tmp, i * 2 + 2, h+1, maxH, list);
-//            }
-//
-//        }else{
+        private TreeNode left;
+        private TreeNode right;
 
-            if (arr[i]!='#' && i*2 + 2 <= arr.length){
-                helper(arr, i * 2 + 1, h+1, maxH, list);
-                helper(arr, i * 2 + 2, h+1, maxH, list);
-//            }
+        private int value;
+
+        public TreeNode(int value) {
+
+            this.value = value;
         }
-
     }
 
+    public static TreeNode createTree(String[] arr) {
+        if (arr == null)
+            return null;
+        TreeNode[] nodeArray = new TreeNode[arr.length];
+        for (int i = 0; i <= arr.length - 1; i++) {
+            if (!arr[i].equals("#")) {
+                if (nodeArray[i] == null) {
+                    nodeArray[i] = new TreeNode(Integer.valueOf(arr[i]));
+                }
+                int index = 2 * i + 1;
+                if (index < arr.length && !arr[index].equals("#")) {
+                    nodeArray[index] = new TreeNode(Integer.valueOf(arr[index]));
+                    nodeArray[i].left = nodeArray[index];
+                } else {
+                    nodeArray[i].left = null;
+                }
+                index++;
+                if (index < arr.length && !arr[index].equals("#")) {
+                    nodeArray[index] = new TreeNode(Integer.valueOf(arr[index]));
+                    nodeArray[i].right = nodeArray[index];
+                } else {
+                    nodeArray[i].right = null;
+                }
+            }
+        }
+        return nodeArray[0];
+    }
 }
