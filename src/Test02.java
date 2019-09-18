@@ -1,29 +1,16 @@
-public boolean isIsomorphic2(String s, String t) {
-        if (s == null || t == null)
-            return false;
-        if (s.length() != t.length())
-            return false;
-        Map<Character, Character> map = new HashMap<Character, Character>();
-        Set<Character> set = new HashSet<Character>();
-        char c1, c2;
-        for (int i = 0; i < s.length(); i++) {
-            c1 = s.charAt(i);
-            c2 = t.charAt(i);
-
-            if (map.containsKey(c1)) {
-                if (map.get(c1) != c2)
-                    return false;
-            } else {
-                if (set.contains(c2)) 
-                    return false;
-                else {
-                    map.put(c1, c2);
-                    set.add(c2);
-                }
-            }
+int maxsequence(int arr[], int len)
+{
+    int max = arr[0]; //初始化最大值为第一个元素
+    for (int i=0; i<len; i++) {
+        int sum = 0; //sum必须清零
+        for (int j=i; j<len; j++) { //从位置i开始计算从i开始的最大连续子序列和的大小，如果大于max，则更新max。
+            sum += arr[j]; 
+            if (sum > max)
+                max = sum;
         }
-        return true;
     }
+    return max;
+
 ————————————————
-版权声明：本文为CSDN博主「杜鲁门」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/bug_moving/article/details/52788409
+版权声明：本文为CSDN博主「石锅拌饭」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/sgbfblog/article/details/8032464
