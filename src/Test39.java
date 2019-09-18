@@ -1,12 +1,40 @@
 /*
-* 在一个二维数组中（每个一维数组的长度相同），
-* 每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。
-* 请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
+*
+数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。
+由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。如果不存在则输出0。
 * */
-public class Test05 {
+public class Test39 {
 
-    public boolean Find(int target, int [][] array) {
+    public int MoreThanHalfNum_Solution(int [] array) {
+        int now = array[0];
+        int num = 0;
+        for(int i = 0; i < array.length; i++){
+            if(num == 0){
+                now = array[i];
+                num ++;
+            }else if(array[i] == now){
+                num++;
+            }else{
+                num--;
+            }
+        }
+        return testResult(array, now);
+    }
 
+    // 用来测试结果的正确性
+    public int testResult(int [] array, int now){
+        int num = 0;
+        for(int i = 0; i < array.length; i++){
+            if(array[i] == now){
+                num ++;
+            }
+        }
+        if(num > array.length/2){
+            return now;
+        }else{
+            return 0;
+        }
     }
 
 }

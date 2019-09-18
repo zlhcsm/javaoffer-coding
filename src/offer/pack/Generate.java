@@ -2,7 +2,7 @@ package offer.pack;
 
 import java.util.Arrays;
 
-public class GenerateArr {
+public class Generate {
     /**
      * @param flag 1,排序  0，乱序
      * @param number 生成的个数
@@ -28,8 +28,20 @@ public class GenerateArr {
         return result;
     }
 
-    public ListNode genLinkedList(int[] arr, int falg){
-
-        return null;
+    /**
+     * 生成链表
+     * @param number
+     * @param falg
+     * @return
+     */
+    public ListNode genLinkedList(int number, int falg){
+        LinkOperator l = new LinkOperator();
+        int[] arr = genArray(number, falg);
+        for (int i : arr) {
+            l.addNode(i);
+        }
+        l.showAllNodes();
+        System.out.println(l.first.val);
+        return l.first;
     }
 }
