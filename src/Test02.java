@@ -50,3 +50,20 @@ public class CreateTree {
   }
   return nodeArray[0];
  }
+public static String preOrderTravel(TreeNode node) {
+  if(node == null)
+   return "#,";
+  String res = node.value + ",";
+  res += preOrderTravel(node.left);
+  res += preOrderTravel(node.right);
+  return res;
+    }
+    @SuppressWarnings("resource")
+ public static void main(String[] args) {
+  Scanner scanner = new Scanner(System.in);
+  String string = scanner.nextLine();
+  String[] strings = string.split(",");
+  TreeNode root = createTree(strings);
+  String s = preOrderTravel(root);
+  System.out.println(s.substring(0,s.length() - 1));
+ }
