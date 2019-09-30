@@ -1,36 +1,31 @@
 package offer.pack;
 
 import java.util.HashMap;
+import java.util.Stack;
 
-/**
- public class TreeNode {
- int val = 0;
- TreeNode left = null;
- TreeNode right = null;
+class Solution {
+    private HashMap<Character, Character> mapping;
 
- public TreeNode(int val) {
- this.val = val;
+    public Solution(){
+        this.mapping = new HashMap<Character, Character>();
+        this.mapping.put(')', '(');
+        this.mapping.put(']', '[');
+        this.mapping.put('}', '{');
+    }
 
- }
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (this.mapping.containsKey(c)){
+                char topElement = stack.isEmpty()?'#':stack.pop();
+                if (topElement != this.mapping.get(c))
+                    return false;
+            }else {
+                stack.push(c);
+            }
 
- }
- */
-public class Solution {
-    public boolean HasSubtree(TreeNode root1,TreeNode root2) {
-        boolean result = false;
-        if (root1 != null && root2 != null){
-            if (root1.val == root2.val) result = DoedTreeHasTree(root1, root2);
-            if (!result) result = HasSubtree(root1.left, root2);
-            if (!result) result = HasSubtree(root1.right, root2);
         }
-        return result;
+        return stack.isEmpty();
     }
-
-    private boolean DoedTreeHasTree(TreeNode root1, TreeNode root2) {
-        if (root1 == null) return false;
-        if (root2 == null) return true;
-        if (root1.val != root2.val) return false;
-        return DoedTreeHasTree(root1.left, root2.left) && DoedTreeHasTree(root1.right, root2.right);
-    }
-
 }
