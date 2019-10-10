@@ -1,0 +1,18 @@
+class Solution{
+    public ListNode reverseList(ListNode pNode){
+        // 此条件确保了下面有两个点
+        if(pNode == null || pNode.next) == null){
+            return pNode;
+        }
+        ListNode pre = null;
+        ListNode cur = pNode
+        ListNode next = pNode.next;
+        while(cur != null){
+            next = next.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+}
